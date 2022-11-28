@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Gtstudio\UrlRewriteImportExport\Model\File\Uploader">
+        <arguments>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="csv" xsi:type="string">csv</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\MessageQueue\MergerFactory">
+        <arguments>
+            <argument name="mergers" xsi:type="array">
+                <item name="urlRewriteImport" xsi:type="string">Gtstudio\UrlRewriteImportExport\Model\Merger</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Gtstudio\UrlRewriteImportExport\Model\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="delete" xsi:type="array">
+                    <item name="request_path" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\RequestPath</item>
+                    <item name="store_view" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\StoreView</item>
+                </item>
+                <item name="add_update" xsi:type="array">
+                    <item name="request_path" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\RequestPath</item>
+                    <item name="target_path" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\TargetPath</item>
+                    <item name="redirect_type" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\RedirectType</item>
+                    <item name="store_view" xsi:type="object">Gtstudio\UrlRewriteImportExport\Model\Validator\StoreView</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

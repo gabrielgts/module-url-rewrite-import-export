@@ -1,0 +1,4 @@
+request_path,target_path,redirect_type,store_code
+request-first,cms/page/view/page_id/20,0,default
+request-second,/,301,default
+request-third,/,302,default

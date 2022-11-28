@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">url_rewrite_import_form.url_rewrite_import_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string"/>
+    </argument>
+    <settings>
+        <layout>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>url_rewrite_import_form.url_rewrite_import_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Gtstudio\UrlRewriteImportExport\Block\Adminhtml\Url\Rewrite\ImportButton"/>
+            <button name="back" class="Gtstudio\UrlRewriteImportExport\Block\Adminhtml\Url\Rewrite\BackButton"/>
+        </buttons>
+        <namespace>url_rewrite_import_form</namespace>
+        <dataScope>data</dataScope>
+    </settings>
+
+    <dataSource name="url_rewrite_import_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="adminhtml/url_rewrite_import/run"/>
+        </settings>
+        <dataProvider class="Gtstudio\UrlRewriteImportExport\Ui\DataProvider\Import" name="url_rewrite_import_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="import_url_rewrite_fieldset">
+        <settings>
+            <label/>
+            <dataScope>data</dataScope>
+        </settings>
+
+        <field name="import_file" formElement="fileUploader">
+            <settings>
+                <label translate="true">Choose CSV file</label>
+                <componentType>fileUploader</componentType>
+                <dataScope>import_file</dataScope>
+                <required>true</required>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <allowedExtensions>csv</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">adminhtml/url_rewrite_fileUploader/save</param>
+                        </uploaderConfig>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+
+        <field name="behavior" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Behavior</label>
+                <required>true</required>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Gtstudio\UrlRewriteImportExport\Ui\Component\Import\Behavior"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.actions.toolbar">
+            <block class="Magento\Backend\Block\Widget\Button"
+                   name="adminhtml.block.url_rewrite.grid.container-import.button"
+                   template="Gtstudio_UrlRewriteImportExport::widget/button.phtml">
+                <arguments>
+                    <argument name="id" xsi:type="string">import_url_rewrites</argument>
+                    <argument name="label" translate="true" xsi:type="string">Import URL Rewrites</argument>
+                    <argument name="class" xsi:type="string">secondary add-products</argument>
+                    <argument name="url" xsi:type="url" path="*/*/import"/>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
