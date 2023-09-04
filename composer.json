@@ -1,6 +1,5 @@
 {
     "name": "gtstudio/module-url-rewrite-import-export",
-    "version": "1.1.0",
     "description": "Mass import export URLS",
     "config": {
         "sort-packages": true
