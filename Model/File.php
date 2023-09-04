@@ -38,9 +38,6 @@ class File
      */
     public function getRowsCount(): int
     {
-        $this->fileObject->rewind();
-        $this->fileObject->seek(PHP_INT_MAX);
-
         return $this->fileObject->key() + 1;
     }
 

@@ -42,7 +42,7 @@ class ImportDirectory
      */
     public function getPath(): string
     {
-        return $this->filesystem->getDirectoryRead(DirectoryList::VAR_DIR)
+        return $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)
             ->getAbsolutePath(static::URL_REWRITE_IMPORT_DIR);
     }
 
@@ -65,7 +65,7 @@ class ImportDirectory
      */
     public function isFileExist(string $fileName): bool
     {
-        return $this->filesystem->getDirectoryRead(DirectoryList::VAR_DIR)
+        return $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)
                 ->isExist(static::URL_REWRITE_IMPORT_DIR . '/' . $fileName);
     }
 }
