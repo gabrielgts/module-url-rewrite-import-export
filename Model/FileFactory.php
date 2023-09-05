@@ -77,8 +77,8 @@ class FileFactory
         return $this->objectManager->create(
             \SplFileObject::class,
             [
-                'file_name' => $this->importDirectory->getPath() . '/' . $fileName,
-                'open_mode' => $openMode
+                'filename' => $this->importDirectory->getPath() . '/' . $fileName,
+                'mode' => $openMode
             ]
         );
     }
