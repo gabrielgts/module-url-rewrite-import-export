@@ -74,7 +74,7 @@ class Report extends \Gtstudio\UrlRewriteImportExport\Controller\Adminhtml\Url\R
                 return $this->responseFileFactory->create(
                     $fileName,
                     ['type' => 'filename', 'value' => $this->importDirectory->getFilePathByName($fileName)],
-                    DirectoryList::VAR_DIR
+                    DirectoryList::MEDIA
                 );
             } catch (\Exception $e) {
                 $this->logger->error($e);

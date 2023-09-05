@@ -185,7 +185,7 @@ class ImportTest extends \PHPUnit\Framework\TestCase
 
         $this->assertArrayHasKey('file', $resultArray);
         $this->assertTrue(
-            $this->fileSystem->getDirectoryRead(DirectoryList::VAR_DIR)
+            $this->fileSystem->getDirectoryRead(DirectoryList::MEDIA)
                 ->isExist(ImportDirectory::URL_REWRITE_IMPORT_DIR . '/' . $resultArray['file'])
         );
 

@@ -46,7 +46,7 @@ class ImportDirectoryTest extends \PHPUnit\Framework\TestCase
 
         $this->filesystemMock->expects($this->once())
             ->method('getDirectoryRead')
-            ->with(DirectoryList::VAR_DIR)
+            ->with(DirectoryList::MEDIA)
             ->willReturn($this->directoryReadMock);
 
         parent::setUp();

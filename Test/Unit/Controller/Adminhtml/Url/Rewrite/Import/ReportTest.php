@@ -165,7 +165,7 @@ class ReportTest extends \PHPUnit\Framework\TestCase
             ->with(
                 $this->fileName,
                 ['type' => 'filename', 'value' => $filePath],
-                DirectoryList::VAR_DIR
+                DirectoryList::MEDIA
             )
             ->willReturn($this->responseMock);
 
@@ -194,7 +194,7 @@ class ReportTest extends \PHPUnit\Framework\TestCase
             ->with(
                 $this->fileName,
                 ['type' => 'filename', 'value' => $filePath],
-                DirectoryList::VAR_DIR
+                DirectoryList::MEDIA
             )
             ->willThrowException($exception);
         $this->loggerMock->expects($this->once())
