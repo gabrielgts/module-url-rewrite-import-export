@@ -47,6 +47,21 @@ class ImportDirectory
     }
 
     /**
+     * Open file
+     *
+     * @param string $fileName
+     * @return Filesystem\File\ReadInterface
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
+    public function openFile(string $fileName)
+    {
+        return $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)
+            ->openFile(
+                static::URL_REWRITE_IMPORT_DIR . '/' . $fileName
+            );
+    }
+
+    /**
      * Get absolute path of an imported/report file by its name
      *
      * @param string $fileName The file name

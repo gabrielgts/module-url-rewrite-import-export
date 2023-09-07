@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Gtstudio\UrlRewriteImportExport\Model;
 
+use Gtstudio\UrlRewriteImportExport\Model\File\ImportDirectory;
 use Gtstudio\UrlRewriteImportExport\Model\Import\BehaviorFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Gtstudio\UrlRewriteImportExport\Model\Import\BehaviorInterface;
@@ -47,15 +48,22 @@ class Import
     private $behaviorFactory;
 
     /**
+     * @var ImportDirectory
+     */
+    private $importDirectory;
+
+    /**
      * @param FileFactory $fileFactory The factory to create the file model instance
      * @param BehaviorFactory $behaviorFactory The factory to create the behavior instance
      */
     public function __construct(
         FileFactory $fileFactory,
-        BehaviorFactory $behaviorFactory
+        BehaviorFactory $behaviorFactory,
+        ImportDirectory $importDirectory
     ) {
         $this->fileFactory = $fileFactory;
         $this->behaviorFactory = $behaviorFactory;
+        $this->importDirectory = $importDirectory;
     }
 
     /**
@@ -69,14 +77,40 @@ class Import
     public function execute(int $operationId, string $fileName, int $offset, int $length, string $behavior)
     {
         $rows = $this->removeFirstLine(
-            $this->fileFactory->create($fileName)
-                ->getRows($offset, $length)
+            $this->getRows($fileName, $offset, $length)
         );
 
         /** @var BehaviorInterface $behaviorObj */
         $behaviorObj = $this->behaviorFactory->create($behavior);
         $behaviorObj->execute($operationId, $rows);
     }
+
+
+    /**
+     * Get csv rows
+     *
+     * @param string $fileName
+     * @param int $offset
+     * @param int $length
+     * @return array
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
+    private function getRows(string $fileName, int $offset, int $length)
+    {
+        $file = $this->importDirectory->openFile($fileName);
+
+        $rows = [];
+        $iteration = 1;
+        $file->seek($offset);
+
+        do {
+            $rows[$iteration] = $file->readCsv();
+            $iteration++;
+        } while (!$file->eof() && $iteration <= $length);
+
+        return $rows;
+    }
+
 
     /**
      * Remove the first row if it is title
